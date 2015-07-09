@@ -1,7 +1,7 @@
 # Function for printing out the correct list required as a screen input in FactSet#
 ###################################################################################
 
-Uscreen <- function(factors = c('ROW12', 'ROW18','ROW9','ROW21','ROW24','ROW26','ROW30','ROW33','ROW36')){
+Uscreen <- function(factors = c('ROW12', 'ROW18','ROW9','ROW21','ROW24','ROW26','ROW30','ROW36')){
   vars <- list()
     for (i in 1:length(factors)){
       vars[[i]] <- t(as.matrix(combn(factors,i)))
@@ -33,7 +33,8 @@ Uscreen <- function(factors = c('ROW12', 'ROW18','ROW9','ROW21','ROW24','ROW26',
   }
   factor_list.df <<- within(master, V1 <- paste('AVG(ROW6,ROW7,ROW8,ROW15,',V1,')',sep=''))
   master <- within(master, V1 <- paste('AVG(ROW6,ROW7,ROW8,ROW15,',V1,')',sep=''))
-  #now you need to figure out how to spit it out with everything in one cell, separated by ;
+  
+  #now separated by ;
   line_list <- list()
   master_t <- t(master)
     for (j in 1:dim(master)[1]){  #extract the colnames and populate param list
@@ -42,3 +43,4 @@ Uscreen <- function(factors = c('ROW12', 'ROW18','ROW9','ROW21','ROW24','ROW26',
   one_line <- do.call(paste, c(list(sep=';'),line_list))
   one_line
 }
+
